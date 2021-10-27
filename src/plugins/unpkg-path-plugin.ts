@@ -6,7 +6,7 @@ export const unpkgPathPlugin = () => {
         setup(build: PluginBuild) {
             //Handling entry point - index.js
             build.onResolve(
-                { filter: /(^index\.js)/ },
+                { filter: /(^index\.js$)/ },
                 (args: OnResolveArgs) => {
                     return { path: args.path, namespace: 'a' };
                 }
