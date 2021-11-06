@@ -7,7 +7,6 @@ import { fetchPlugin } from './plugins/fetch-plugin';
 
 const App = () => {
   const [input, setInput] = useState('');
-  const [code, setCode] = useState('');
   const iframe = useRef<any>();
 
   const startService = async () => {
@@ -27,6 +26,8 @@ const App = () => {
   }, []);
 
   const onClick = async () => {
+    iframe.current.srcdoc = html;
+
     const result = await esbuild.build({
       entryPoints: ['index.js'],
       bundle: true,
@@ -42,21 +43,6 @@ const App = () => {
     iframe.current.contentWindow.postMessage(result.outputFiles[0].text, '*');
   };
 
-  const html = `
-      <html>
-        <head>
-        </head>
-        <body>
-          <div id="root"></div>
-          <script>
-            window.addEventListener('message', (event) => {
-              eval(event.data);
-            }, false);
-          </script>
-        </body>
-      </html>
-    `;
-
   return (
     <>
       <textarea
@@ -66,10 +52,35 @@ const App = () => {
       <div>
         <button onClick={onClick}>Submit</button>
       </div>
-      <pre>{code}</pre>
-      <iframe ref={iframe} title="playground" sandbox="allow-scripts" srcDoc={html} />
+      <iframe
+        ref={iframe}
+        title="playground"
+        sandbox="allow-scripts"
+        srcDoc={html}
+      />
     </>
   );
 };
+
+const html = `
+<html>
+  <head>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      window.addEventListener('message', (event) => {
+        try{
+          eval(event.data);
+        } catch(error) {
+          const root = document.querySelector('#root');
+          root.innerHTML = '<div style="color: red;"><h4>Runtime Error</h4>' + error + '</div>';
+          throw error;
+        }
+      }, false);
+    </script>
+  </body>
+</html>
+`;
 
 ReactDom.render(<App />, document.querySelector('#root'));
