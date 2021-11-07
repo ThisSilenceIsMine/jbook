@@ -1,3 +1,4 @@
+import 'bulmaswatch/superhero/bulmaswatch.min.css';
 import { useRef, useState } from 'react';
 import ReactDom from 'react-dom';
 import * as esbuild from 'esbuild-wasm';
@@ -46,7 +47,12 @@ const App = () => {
 
   return (
     <>
-    <CodeEditor initialValue="Hello" onChange={(value) => {setInput(value)}}/>
+      <CodeEditor
+        initialValue="Hello"
+        onChange={(value) => {
+          setInput(value);
+        }}
+      />
       <div>
         <button onClick={onClick}>Submit</button>
       </div>
