@@ -73,7 +73,6 @@ export const CodeEditor = ({ initialValue, onChange }: CodeEditorProps) => {
       <MonacoEditor
         value={initialValue}
         onMount={onEditorDidMount}
-        height="500px"
         theme="vs-dark"
         language="javascript"
         options={{

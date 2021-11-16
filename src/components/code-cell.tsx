@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { CodeEditor } from 'components/code-editor';
 import { Preview } from 'components/preview';
+import { Resizable } from 'components/resizable';
 
 import { bundle } from 'bundler';
 
@@ -16,17 +17,21 @@ export const CodeCell = () => {
   };
 
   return (
-    <>
-      <CodeEditor
-        initialValue="Hello"
-        onChange={(value) => {
-          setInput(value);
-        }}
-      />
-      <div>
-        <button onClick={onClick}>Submit</button>
+    <Resizable direction="vertical">
+      <div style={{ height: '100%', display: 'flex', flexDirection: 'row' }}>
+        <Resizable direction="horizontal">
+          <CodeEditor
+            initialValue=""
+            onChange={(value) => {
+              setInput(value);
+            }}
+          />
+        </Resizable>
+        {/* <div>
+          <button onClick={onClick}>Submit</button>
+        </div> */}
+        <Preview code={code} />
       </div>
-      <Preview code={code} />
-    </>
+    </Resizable>
   );
 };
