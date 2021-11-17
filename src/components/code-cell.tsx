@@ -10,7 +10,7 @@ import { useDebounce } from 'hooks';
 export const CodeCell = () => {
   const [input, setInput] = useState('');
   const [code, setCode] = useState('');
-
+  const [error, setError] = useState('');
   const debouncedInput = useDebounce(input, 1000);
 
   useEffect(() => {
@@ -18,7 +18,8 @@ export const CodeCell = () => {
       (async () => {
         try {
           const result = await bundle(debouncedInput);
-          setCode(result.outputFiles[0].text);
+          setCode(result.code);
+          setError(result.error);
         } catch (error) {
           console.error(error);
         }
@@ -40,7 +41,7 @@ export const CodeCell = () => {
         {/* <div>
           <button onClick={onClick}>Submit</button>
         </div> */}
-        <Preview code={code} />
+        <Preview code={code} error={error} />
       </div>
     </Resizable>
   );
