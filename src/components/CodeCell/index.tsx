@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import { CodeEditor } from 'components/code-editor';
-import { Preview } from 'components/preview';
-import { Resizable } from 'components/resizable';
+import { CodeEditor } from 'components/CodeEditor';
+import { Preview } from 'components/Preview';
+import { Resizable } from 'components/Resizable';
 
 import { bundle } from 'bundler';
 import { useDebounce } from 'hooks';

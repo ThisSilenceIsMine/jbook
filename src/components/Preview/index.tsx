@@ -8,12 +8,12 @@ export interface PreviewProps {
 }
 
 export const Preview = ({ code, error }: PreviewProps) => {
-  const iframe = useRef<any>();
+  const iframe = useRef<HTMLIFrameElement>(null!);
 
   useEffect(() => {
     iframe.current.srcdoc = html;
     setTimeout(() => {
-      iframe.current.contentWindow.postMessage(code, '*');
+      iframe.current?.contentWindow?.postMessage(code, '*');
     }, 50);
   }, [code]);
 
