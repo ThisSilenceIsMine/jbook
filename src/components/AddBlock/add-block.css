@@ -1,0 +1,17 @@
+.container {
+  width: 100%;
+  display: flex;
+  place-content: center;
+  margin-top: 2em;
+  gap: 6em;
+}
+
+.add-cell {
+  color: white;
+  background-color: gray;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 12px;
+  padding: 4px;
+  flex: 1;
+}
