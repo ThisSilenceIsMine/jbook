@@ -20,6 +20,7 @@
     "@uiw/react-md-editor": "^3.7.0",
     "axios": "^0.24.0",
     "bulmaswatch": "^0.8.1",
+    "cypress": "^11.2.0",
     "esbuild-wasm": "^0.13.8",
     "localforage": "^1.10.0",
     "monaco-editor": "^0.30.0",
