@@ -22,6 +22,7 @@ export const Preview = ({ code, error }: PreviewProps) => {
       <iframe
         ref={iframe}
         title="preview"
+        data-cy="preview"
         sandbox="allow-scripts"
         srcDoc={html}
       />
